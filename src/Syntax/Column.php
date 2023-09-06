@@ -104,15 +104,15 @@ class Column implements QueryPartInterface
     }
 
     /**
-     * @param null|string $alias
+     * @param string|null $alias
      *
      * @return $this
      *
      * @throws QueryException
      */
-    public function setAlias($alias)
+    public function setAlias(?string $alias): static
     {
-        if (0 == \strlen($alias)) {
+        if (empty($alias)) {
             $this->alias = null;
 
             return $this;
@@ -122,7 +122,7 @@ class Column implements QueryPartInterface
             throw new QueryException("Can't use alias because column name is ALL (*)");
         }
 
-        $this->alias = (string) $alias;
+        $this->alias = $alias;
 
         return $this;
     }
